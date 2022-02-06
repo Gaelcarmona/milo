@@ -1,0 +1,32 @@
+<div class='col-9'>
+    <nav aria-label='breadcrumb'>
+        <ol class='breadcrumb'>
+            <li class='breadcrumb-item'><a href='?action=admin'>Administration</a></li>
+            <li class='breadcrumb-item active' aria-current='page'><?php echo htmlspecialchars($insertEditMatch)?></li>
+        </ol>
+    </nav>
+
+    <h1 class='mx-5 mt-1 fw-bold text-center'><?php echo htmlspecialchars($insertEditMatch)?></h1>
+    <form class='mx-5 mt-5' method='post'>
+         <div>
+            <input type='hidden' name='id' value='<?php echo $oMatch->getId() ?>'>
+        </div>
+        <div class='mb-3'>
+            <label for='title' class='form-label fw-bold px-3'>Nom du match</label>
+            <input type='text' name='title' required  value='<?php echo htmlspecialchars($oMatch->getTitle()) ?>'>
+        </div>
+        
+        <div>
+            <input type="checkbox" value="<?= htmlspecialchars( $oUser->getId() ) ?>" id="<?= htmlspecialchars( $oUser->getPseudo() ) ?>" name="joueur[]" >
+            <label for="<?= htmlspecialchars( $oUser->getPseudo() ) ?>"><?= htmlspecialchars( $oUser->getPseudo() ) ?></label>
+            <?php 
+                foreach ($aUser_in_championships as $oUser) { ?>
+                    
+                        <input type="checkbox" value="<?= htmlspecialchars( $oUser->getUser()->getId() ) ?>" id="<?= htmlspecialchars( $oUser->getUser()->getPseudo() ) ?>" name="joueur[]" >
+                        <label for="<?= htmlspecialchars( $oUser->getUser()->getPseudo() ) ?>"><?= htmlspecialchars( $oUser->getUser()->getPseudo() ) ?></label>
+            <?php } ?>
+        </div>
+
+        <button type='submit' class='btn btn-primary my-3'>Envoyer</button>
+    </form> 
+</div>

@@ -1,0 +1,72 @@
+<div class='col-9'>
+    <nav aria-label='breadcrumb'>
+        <ol class='breadcrumb'>
+            <li class='breadcrumb-item'><a href='?action=admin'>Administration</a></li>
+            <li class='breadcrumb-item active' aria-current='page'><?php echo htmlspecialchars($insertEditResult)?></li>
+        </ol>
+    </nav>
+
+    <h1 class='mx-5 mt-1 fw-bold text-center'><?php echo htmlspecialchars($insertEditResult)?></h1>
+    <form class='mx-5 mt-5' method='post'>
+         <div>
+            <input type='hidden' name='id' value='<?php echo $oResult->getId() ?>'>
+        </div>
+        <div >
+            <label for="user" class="form-label">Nom du joueur <span class="small text-secondary">(Obligatoire)</span></label>
+            <select
+            id="user"
+            name="user">
+            <option value="">Choisis un joueur</option>
+            <?php foreach($aUsers as $oUser) : ?>
+            <option value="<?= intval( $oUser->getUser()->getId() ) ?>">
+                    <?= htmlspecialchars( $oUser->getUser()->getPseudo() ) ?>
+            </option>
+            <?php endforeach; ?>
+            </select>               
+        </div>
+        <div >
+            <label for="place" class="form-label">Placement du joueur <span class="small text-secondary">(Obligatoire)</span></label>
+            <select
+            id="place"
+            name="place">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+            </select>               
+        </div>
+
+
+        <div >
+            <label for="deck" class="form-label">Nom du deck <span class="small text-secondary">(Obligatoire)</span></label>
+            <select
+            id="deck"
+            name="deck">
+            <option value="">Choisis un deck</option>
+            <?php foreach($aDecks as $oDeck) : ?>
+            <option
+                <?php
+                    if( 
+                        // On vérifie si l'article possède un id "cohérent" (et donc "existe")
+                        $oResult->getId()
+                        &&
+                        // On vérifie si l'id de la catégorie "en cours" est le même que celle de l'article
+                        $oDeck->getId() == $oResult->getUser()->getId() 
+                    ) : ?>
+                    selected                                
+                <?php endif; ?>
+                    value="<?= intval( $oDeck->getId() ) ?>">
+                    <?= htmlspecialchars( $oDeck->getTitle() ) ?>
+            </option>
+            <?php endforeach; ?>
+            </select>               
+        </div>
+
+
+
+        <button type='submit' class='btn btn-primary my-3'>Envoyer</button>
+
+    </form> 
+</div>

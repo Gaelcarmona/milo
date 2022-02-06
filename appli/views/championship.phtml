@@ -1,0 +1,61 @@
+<div class='col-9'>
+    <nav aria-label='breadcrumb'>
+        <ol class='breadcrumb'>
+            <li class='breadcrumb-item'><a href='?action=admin'>Administration</a></li>
+        </ol>
+    </nav>
+    <p><em><?php echo htmlspecialchars($oChampionship->getTitle()) ?></em></p>
+    <h1><?php echo htmlspecialchars($oChampionship->getUser()->getPseudo()) ?></h1><br>
+    <p>le <?php echo htmlspecialchars($oChampionship->getDateCreate()->format('d/m/Y')) ?></p>
+
+
+    <h3 class='mx-5 mt-1 fw-bold text-center'>Les joueurs participants </h3>
+    <table class='col-12 bg-main'>
+        <thead class='text-white bg-dark'>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Elo</th>
+            <th>Points totaux</th>
+            <th>Supprimer</th>
+        </thead>
+        <?php
+            foreach ($aUser_in_championships as $oUser) { ?>
+                <tr>
+                    <td><?php echo intval($oUser->getUser()->getId()) ?></td>  
+                    <td><?php echo htmlspecialchars($oUser->getUser()->getPseudo()) ?></td>
+                    <td><?php echo intval($oUser->getElo()) ?></td>
+                    <td></td>                 
+                    <td><a href='?action=delete_user_in_championship&amp;id=<?php echo htmlspecialchars( $oUser->getUser()->getId() )?>'><i class='far fa-trash-alt'></i></a></td>
+                </tr>
+            <?php } ?>
+    </table>
+    <a class='nav-link' href='?action=insert_user_in_championship&amp;championshipId=<?php echo intval( $oChampionship->getId() )?>'>Ajouter un joueur</a>
+
+    <h3 class='mx-5 mt-1 fw-bold text-center'>Les matchs du championnat </h3>
+    <table class='col-12 bg-main'>
+        <thead class='text-white bg-dark'>
+            <th>ID</th>
+            <th>Date de création</th>
+            <th>Nom</th>
+            <th>Modifier</th>
+            <th>Supprimer</th>
+        </thead>
+        <?php
+            foreach ($aMatchs as $oMatch) {?>
+                <tr>
+                    <td><?php echo intval($oMatch->getId()) ?></td>
+                    <td><?php echo htmlspecialchars( $oMatch->getDateCreate()->format('d/m/Y') )  ?></td>
+                    <td><a href='?action=match&amp;id=<?php echo intval($oMatch->getId())?>'> <?php echo htmlspecialchars($oMatch->getTitle())?></td>                   
+                    <td><a href='?action=edit_match&amp;id=<?php echo intval( $oMatch->getId() )?>'><i class='far fa-edit'></i></a></td>
+                    <td><a href='?action=delete_match&amp;id=<?php echo intval( $oMatch->getId() )?>'><i class='far fa-trash-alt'></i></a></td>
+                </tr>
+            <?php } ?>
+    </table>
+    <a class='nav-link' href='?action=insert_match&amp;championshipId=<?php echo intval( $oChampionship->getId() )?>'>Créer un match</a>
+
+
+
+
+
+
+</div>

@@ -1,0 +1,56 @@
+<div class='col-9'>
+    <nav aria-label='breadcrumb'>
+        <ol class='breadcrumb'>
+            <li class='breadcrumb-item'><a href='?action=admin'>Administration</a></li>
+            <li class='breadcrumb-item active' aria-current='page'><?php echo htmlspecialchars($insertEditUser)?></li>
+        </ol>
+    </nav>
+
+        <h1 class='mx-5 mt-1 fw-bold text-center'><?php echo htmlspecialchars($insertEditUser)?></h1>
+
+            
+
+    <form class='mx-5 mt-5' method='post'>
+         <div>
+            <input type='hidden' name='id' value='<?php echo $oUser->getId() ?>'>
+        </div>
+        <div class='mb-3'>
+            <label for='pseudo' class='form-label fw-bold px-3'>Pseudo</label>
+            <input 
+                type='text' 
+                name='pseudo' 
+                required 
+                value='<?php echo htmlspecialchars($oUser->getPseudo()) ?>'
+            >
+        </div>
+        <div class='mb-3'>
+            <label for='email' class='form-label fw-bold px-3'>Adresse e-mail</label>
+            <input 
+                type='mail' 
+                required 
+                name='email' 
+                value='<?php echo htmlspecialchars($oUser->getEmail()) ?>'
+            >
+        </div>
+        <div class='mb-3'>
+            <label for='password' class='form-label fw-bold px-3'>Mot de passe</label>
+            <input 
+            type='password' 
+            id="password"
+            required 
+            name='password'  
+            value=''>
+        </div>
+        <div class='mb-3'>
+            <label for='confirmpassword' class='form-label fw-bold px-3'>Confirmer le mot de passe</label>
+            <input 
+            type='password' 
+            id="confirmpassword"
+            required 
+            name='confirmpassword'  
+            value=''>
+        </div>
+
+        <button type='submit' class='btn btn-primary my-3'>Envoyer</button>
+    </form> 
+</div>

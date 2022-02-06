@@ -1,0 +1,61 @@
+<div class='col-9'>
+            <nav aria-label='breadcrumb'>
+                <ol class='breadcrumb'>
+                    <li class='breadcrumb-item'><a href='?action=admin'>Administration</a></li>
+                </ol>
+            </nav>
+            <p><em><?php echo htmlspecialchars($oUser->getPseudo()) ?></em></p>
+
+            <p>le <?php echo htmlspecialchars($oUser->getDateCreate()->format('d/m/Y')) ?></p>
+
+
+            <h3 class='mx-5 mt-1 fw-bold text-center'>Les decks de <?php echo htmlspecialchars($oUser->getPseudo()) ?> </h3>
+    <table class='col-12 bg-main'>
+        <thead class='text-white bg-dark'>
+            <th>ID</th>
+            <th>Date de création</th>
+            <th>Nom</th>
+            <th>Modifier</th>
+            <th>Supprimer</th>
+        </thead>
+        <?php
+            foreach ($aDecks as $oDeck) {?>
+                <tr>
+                    <td><?php echo intval($oDeck->getId()) ?></td>
+                    <td><?php echo htmlspecialchars( $oDeck->getDateCreate()->format('d/m/Y') )  ?></td>
+                    <td><a href='?action=deck&amp;id=<?php echo intval($oDeck->getId())?>'> <?php echo htmlspecialchars($oDeck->getTitle())?></td>                   
+                    <td><a href='?action=edit_deck&amp;id=<?php echo intval( $oDeck->getId() )?>'><i class='far fa-edit'></i></a></td>
+                    <td><a href='?action=delete_deck&amp;id=<?php echo intval( $oDeck->getId() )?>'><i class='far fa-trash-alt'></i></a></td>
+                </tr>
+            <?php } ?>
+    </table>
+    <a class='nav-link' href='?action=insert_deck&amp;id=<?php echo intval( $oUser->getId() )?>'>Créer un deck</a>
+
+
+    <h3 class='mx-5 mt-1 fw-bold text-center'>Les résultats de <?php echo htmlspecialchars($oUser->getPseudo()) ?> </h3>
+    <table class='col-12 bg-main'>
+        <thead class='text-white bg-dark'>
+            <th>ID</th>
+            <th>Place</th>
+            <th>Joueur</th>
+            <th>Deck</th>
+            <th>Match</th>
+            <th>Championnat</th>
+            <th>Modifier</th>
+            <th>Supprimer</th>
+        </thead>
+        <?php
+            foreach ($aResults as $oResult) {?>
+                <tr>
+                    <td><?php echo intval($oResult->getId()) ?></td>
+                    <td><?php echo htmlspecialchars($oResult->getPlace())?></td>
+                    <td><a href='?action=player&amp;id=<?php echo intval($oResult->getUser()->getID())?>'><?php echo htmlspecialchars($oResult->getUser()->getPseudo()) ?></td>
+                    <td><a href='?action=deck&amp;id=<?php echo intval($oResult->getDeck()->getID())?>'><?php echo htmlspecialchars($oResult->getDeck()->getTitle()) ?></td>
+                    <td><a href='?action=match&amp;id=<?php echo intval($oResult->getMatch()->getID())?>'><?php echo htmlspecialchars($oResult->getMatch()->getTitle()) ?></td>
+                    <td><a href='?action=championship&amp;id=<?php echo intval($oResult->getChampionship()->getID())?>'><?php echo htmlspecialchars($oResult->getChampionship()->getTitle()) ?></td>
+                    <td><a href='?action=edit_result&amp;id=<?php echo intval( $oResult->getId() )?>'><i class='far fa-edit'></i></a></td>
+                    <td><a href='?action=delete_result&amp;id=<?php echo intval( $oResult->getId() )?>'><i class='far fa-trash-alt'></i></a></td>
+                </tr>
+            <?php } ?>
+    </table>
+</div>

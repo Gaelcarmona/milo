@@ -1,0 +1,87 @@
+<div class='col-9 text-center'>
+    <div class='bg-main'>
+    <h1>Tableau de bord</h1>
+    <p>Gestion des entrées</p>
+    </div>
+
+
+    <h3 class='mx-5 mt-1 fw-bold text-center'>Liste des utilisateurs</h1>
+    <table class='col-12 bg-main'>
+        <thead class='text-white bg-dark'>
+            <th>ID</th>
+            <th>Date de création</th>
+            <th>Dernière connexion</th>
+            <th>Pseudo</th>
+            <th>Mail</th>
+            <th>Mot de passe</th>
+            <th>Modifier</th>
+            <th>Supprimer</th>
+        </thead>
+        <?php
+            foreach ($aUsers as $oUser) {?>
+                <tr>
+                    <td><?php echo intval($oUser->getId()) ?></td>
+                    <td><?php echo htmlspecialchars( $oUser->getDateCreate()->format('d/m/Y') )  ?></td>
+                    <td><?php echo htmlspecialchars( $oUser->getDateConnect()->format('d/m/Y') )  ?></td>
+                    <td><a href='?action=user&amp;id=<?php echo intval($oUser->getId())?>'> <?php echo htmlspecialchars($oUser->getPseudo())?></td>
+                    <td><?php echo htmlspecialchars( $oUser->getEmail() )  ?></td>
+                    <td><?php echo htmlspecialchars( $oUser->getPass() )  ?></td>
+                    <td><a href='?action=edit_user&amp;id=<?php echo intval( $oUser->getId() )?>'><i class='far fa-edit'></i></a></td>
+                    <td><a href='?action=delete_user&amp;id=<?php echo intval( $oUser->getId() )?>'><i class='far fa-trash-alt'></i></a></td>
+                </tr>
+            <?php } ?>
+    </table>
+
+    <h3 class='mx-5 mt-1 fw-bold text-center'>Liste des championnats</h1>
+    <table class='col-12 bg-main'>
+        <thead class='text-white bg-dark'>
+            <th>ID</th>
+            <th>Date de création</th>
+            <th>Nom</th>
+            <th>Utilisateur</th>
+            <th>Modifier</th>
+            <th>Supprimer</th>
+        </thead>
+        <?php
+            foreach ($aChampionships as $oChampionship) {?>
+                <tr>
+                    <td><?php echo intval($oChampionship->getId()) ?></td>
+                    <td><?php echo htmlspecialchars( $oChampionship->getDateCreate()->format('d/m/Y') )  ?></td>
+                    <td><a href='?action=championship&amp;id=<?php echo intval($oChampionship->getId())?>'> <?php echo htmlspecialchars($oChampionship->getTitle())?></td>
+                    <td><?php echo htmlspecialchars($oChampionship->getUser()->getPseudo()) ?></td>                     
+                    <td><a href='?action=edit_championship&amp;id=<?php echo intval( $oChampionship->getId() )?>'><i class='far fa-edit'></i></a></td>
+                    <td><a href='?action=delete_championship&amp;id=<?php echo intval( $oChampionship->getId() )?>'><i class='far fa-trash-alt'></i></a></td>
+                </tr>
+            <?php } ?>
+    </table>
+
+    <h3 class='mx-5 mt-1 fw-bold text-center'>Liste des matchs</h1>
+    <table class='col-12 bg-main'>
+        <thead class='text-white bg-dark'>
+            <th>ID</th>
+            <th>Date de création</th>
+            <th>Nom</th>
+            <th>Championnat</th>
+            <th>Modifier</th>
+            <th>Supprimer</th>
+        </thead>
+        <?php
+            foreach ($aMatchs as $oMatch) {?>
+                <tr>
+                    <td><?php echo intval($oMatch->getId()) ?></td>
+                    <td><?php echo htmlspecialchars( $oMatch->getDateCreate()->format('d/m/Y') )  ?></td>
+                    <td><a href='?action=match&amp;id=<?php echo intval($oMatch->getId())?>'> <?php echo htmlspecialchars($oMatch->getTitle())?></td>
+                    <td><?php echo htmlspecialchars($oMatch->getChampionship()->getTitle()) ?></td>                     
+                    <td><a href='?action=edit_match&amp;id=<?php echo intval( $oMatch->getId() )?>'><i class='far fa-edit'></i></a></td>
+                    <td><a href='?action=delete_match&amp;id=<?php echo intval( $oMatch->getId() )?>'><i class='far fa-trash-alt'></i></a></td>
+                </tr>
+            <?php } ?>
+    </table>
+
+
+
+
+    
+
+
+</div>

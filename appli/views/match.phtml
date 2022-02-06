@@ -1,0 +1,48 @@
+<div class='col-9'>
+            <nav aria-label='breadcrumb'>
+                <ol class='breadcrumb'>
+                    <li class='breadcrumb-item'><a href='?action=admin'>Administration</a></li>
+                </ol>
+            </nav>
+            <p><em>Match :<?php echo htmlspecialchars($oMatch->getTitle()) ?></em></p>
+            <h1>Dans le championnat :<?php echo htmlspecialchars($oMatch->getChampionship()->getTitle()) ?></h1><br>
+            <p>le :<?php echo htmlspecialchars($oMatch->getDateCreate()->format('d/m/Y')) ?></p>
+
+
+    <h3 class='mx-5 mt-1 fw-bold text-center'>Les résultats de <?php echo htmlspecialchars($oMatch->getTitle()) ?> </h3>
+    <table class='col-12 bg-main'>
+        <thead class='text-white bg-dark'>
+            <th>ID</th>
+            <th>Joueur</th>
+            <th>Deck</th>
+            <th>Place</th>
+            <th>Joueurs éliminés</th>
+            <th>Points</th>
+            <th>Ajouter un joueur éliminé</th>
+            <th>Modifier</th>
+            <th>Supprimer</th>
+        </thead>
+        <?php
+            foreach ($aResults as $oResult) {?>
+                <tr>
+                    <td><a href='?action=result&amp;id=<?php echo intval($oResult->getID())?>'><?php echo intval($oResult->getId()) ?></td>
+                    <td><a href='?action=player&amp;id=<?php echo intval($oResult->getUser()->getID())?>'><?php echo htmlspecialchars($oResult->getUser()->getPseudo()) ?></td>
+                    <td><a href='?action=deck&amp;id=<?php echo intval($oResult->getDeck()->getID())?>'><?php echo htmlspecialchars($oResult->getDeck()->getTitle()) ?></td>
+                    <td><?php echo htmlspecialchars($oResult->getPlace())?></td>
+                    <td>
+                        <?php
+                        foreach ($aKills = appli\Repository\KillRepository::findByResultId($oResult->getId()) as $oKill) {?>
+                            <a href='?action=delete_kill&amp;resultId=<?php echo htmlspecialchars($oKill->getResult()->getId())?>&amp;playerId=<?php echo intval($oKill->getUser()->getId())?>&amp;matchId=<?php echo intval($id) ?>'><?php echo htmlspecialchars($oKill->getUser()->getPseudo())?>
+                            <i class='far fa-trash-alt'></i>
+                            <br>
+                        <?php }?>
+                    </td>
+                    <td><?php echo htmlspecialchars($oResult->getScore()) ?> </td>
+                    <td><a href="?action=insert_kill&amp;resultId=<?php echo htmlspecialchars($oResult->getId())?>&amp;userId=<?php echo intval($oResult->getUser()->getID())?>&amp;matchId=<?php echo intval($id) ?>">Ajouter un kill<i class='far fa-edit'></i></a></td>
+                    <td><a href='?action=edit_result&amp;matchId=<?php echo intval( $oMatch->getId() )?>&amp;championshipId=<?php echo intval($oMatch->getChampionship()->getId())?>&amp;resultId=<?php echo intval($oResult->getId())?>'><i class='far fa-edit'></i></a></td>
+                    <td><a href='?action=delete_result&amp;id=<?php echo intval( $oResult->getId() )?>&amp;matchId=<?php echo intval($id) ?>'><i class='far fa-trash-alt'></i></a></td>
+                </tr>
+            <?php } ?>
+    </table>
+    <a class='nav-link' href='?action=insert_result&amp;matchId=<?php echo intval( $oMatch->getId() )?>&amp;championshipId=<?php echo intval($oMatch->getChampionship()->getId())?>'>Entrer un résultat</a>
+</div>

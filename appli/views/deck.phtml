@@ -1,0 +1,39 @@
+<div class='col-9'>
+            <nav aria-label='breadcrumb'>
+                <ol class='breadcrumb'>
+                    <li class='breadcrumb-item'><a href='?action=admin'>Administration</a></li>
+
+                </ol>
+            </nav>
+            <p><em><?php echo htmlspecialchars($oDeck->getTitle()) ?></em></p>
+            <h1><?php echo htmlspecialchars($oDeck->getPlayer()->getPseudo()) ?></h1><br>
+            <p>le <?php echo htmlspecialchars($oDeck->getDateCreate()->format('d/m/Y')) ?></p>
+
+    <h3 class='mx-5 mt-1 fw-bold text-center'>Les résultats de <?php echo htmlspecialchars($oDeck->getTitle()) ?> </h3>
+    <table class='col-12 bg-main'>
+        <thead class='text-white bg-dark'>
+            <th>ID</th>
+            <th>Place</th>
+            <th>Joueur</th>
+            <th>Deck</th>
+            <th>Match</th>
+            <th>Championnat</th>
+            <th>Modifier</th>
+            <th>Supprimer</th>
+        </thead>
+        <?php
+            foreach ($aResults as $oResult) {?>
+                <tr>
+                    <td><?php echo intval($oResult->getId()) ?></td>
+                    <td><?php echo htmlspecialchars($oResult->getPlace())?></td>
+                    <td><a href='?action=player&amp;id=<?php echo intval($oResult->getPlayer()->getID())?>'><?php echo htmlspecialchars($oResult->getPlayer()->getPseudo()) ?></td>
+                    <td><a href='?action=deck&amp;id=<?php echo intval($oResult->getDeck()->getID())?>'><?php echo htmlspecialchars($oResult->getDeck()->getTitle()) ?></td>
+                    <td><a href='?action=match&amp;id=<?php echo intval($oResult->getMatch()->getID())?>'><?php echo htmlspecialchars($oResult->getMatch()->getTitle()) ?></td>
+                    <td><a href='?action=championship&amp;id=<?php echo intval($oResult->getChampionship()->getID())?>'><?php echo htmlspecialchars($oResult->getChampionship()->getTitle()) ?></td>
+                    <td><a href='?action=edit_result&amp;id=<?php echo intval( $oResult->getId() )?>'><i class='far fa-edit'></i></a></td>
+                    <td><a href='?action=delete_result&amp;id=<?php echo intval( $oResult->getId() )?>'><i class='far fa-trash-alt'></i></a></td>
+                </tr>
+            <?php } ?>
+    </table>
+
+</div>

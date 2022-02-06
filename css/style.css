@@ -1,0 +1,23 @@
+body{
+    height: 100vh;
+}
+a{
+    text-decoration: none;
+    color: white;
+}
+
+main a{
+    color: blue;
+}
+.bg-main{
+    background-color: #d0d1d1;
+    /* background-color:grey; */
+}
+main{
+    height: 100vh;
+}
+em{
+    background-color: red;
+    border-radius: 30px;
+    padding: 0.5em;
+}

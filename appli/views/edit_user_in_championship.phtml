@@ -1,0 +1,27 @@
+<div class='col-9'>
+    <nav aria-label='breadcrumb'>
+        <ol class='breadcrumb'>
+            <li class='breadcrumb-item'><a href='?action=admin'>Administration</a></li>
+        </ol>
+    </nav>
+
+
+
+
+
+    <form class='mx-5 mt-5' method="post">
+        <div>
+            <input type="checkbox" value="<?= htmlspecialchars( $oUser->getId() ) ?>" id="<?= htmlspecialchars( $oUser->getPseudo() ) ?>" name="joueur[]" >
+            <label for="<?= htmlspecialchars( $oUser->getPseudo() ) ?>"><?= htmlspecialchars( $oUser->getPseudo() ) ?></label>
+            <?php 
+                foreach ($aUsers as $oUser) { ?>
+                    
+                        <input type="checkbox" value="<?= htmlspecialchars( $oUser->getId() ) ?>" id="<?= htmlspecialchars( $oUser->getPseudo() ) ?>" name="joueur[]" >
+                        <label for="<?= htmlspecialchars( $oUser->getPseudo() ) ?>"><?= htmlspecialchars( $oUser->getPseudo() ) ?></label>
+            <?php } ?>
+        </div>
+    <button type='submit' class='btn btn-primary my-3'>Envoyer</button>
+    </form>
+
+
+</div>

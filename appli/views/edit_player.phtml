@@ -1,0 +1,30 @@
+<div class='col-9'>
+    <nav aria-label='breadcrumb'>
+        <ol class='breadcrumb'>
+            <li class='breadcrumb-item'><a href='?action=admin'>Administration</a></li>
+            <li class='breadcrumb-item active' aria-current='page'><?php echo htmlspecialchars($insertEditPlayer)?></li>
+        </ol>
+    </nav>
+
+
+        <h1 class='mx-5 mt-1 fw-bold text-center'><?php echo htmlspecialchars($insertEditPlayer)?></h1>
+            
+
+    <form class='mx-5 mt-5' method='post'>
+         <div>
+            <input type='hidden' name='id' value='<?php echo $oUser->getId() ?>'>
+        </div>
+        <div class='mb-3'>
+            <label for='pseudo' class='form-label fw-bold px-3'>Pseudo</label>
+            <input 
+                type='text' 
+                name='pseudo' 
+                required 
+                value='<?php echo htmlspecialchars($oUser->getPseudo()) ?>'
+            >
+        </div>
+
+
+        <button type='submit' class='btn btn-primary my-3'>Envoyer</button>
+    </form> 
+</div>

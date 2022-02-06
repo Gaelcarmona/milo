@@ -1,0 +1,40 @@
+<div class='col-9'>
+    <nav aria-label='breadcrumb'>
+        <ol class='breadcrumb'>
+            <li class='breadcrumb-item'><a href='?action=admin'>Administration</a></li>
+            <li class='breadcrumb-item active' aria-current='page'><?php echo htmlspecialchars($insertEditKill)?></li>
+        </ol>
+    </nav>
+
+    <h1 class='mx-5 mt-1 fw-bold text-center'><?php echo htmlspecialchars($insertEditKill)?> par <?php echo htmlspecialchars($oKill->getUser()->getPseudo())?></h1>
+    <form class='mx-5 mt-5' method='post'>
+
+        <div >
+            <label for="userKilled" class="form-label">Nom du joueur <span class="small text-secondary">(Obligatoire)</span></label>
+            <select
+            id="userKilled"
+            name="userKilled">
+            <option value="">Choisis un joueur</option>
+            <?php foreach($aUsers as $oUser) : ?>
+            <option
+                <?php
+                    if( 
+                        // On vérifie si l'article possède un id "cohérent" (et donc "existe")
+                        $oKill->getResult()
+                        &&
+                        // On vérifie si l'id de la catégorie "en cours" est le même que celle de l'article
+                        $oUser->getUser()->getId() == $oKill->getUser()->getId() 
+                    ) : ?>
+                    selected                                
+                <?php endif; ?>
+                    value="<?= intval( $oUser->getUser()->getId() ) ?>">
+                    <?= htmlspecialchars( $oUser->getUser()->getPseudo() ) ?>
+            </option>
+            <?php endforeach; ?>
+            </select>               
+        </div>
+
+        <button type='submit' class='btn btn-primary my-3'>Envoyer</button>
+
+    </form> 
+</div>
