@@ -11,6 +11,7 @@ spl_autoload_register(function (string $sClass){
 // session_set_cookie_params([
 //         ''=>,
 // ]);
+// starter la session
 session_start();
 
 require_once __DIR__ . '/appli/models/dataBase.php';
