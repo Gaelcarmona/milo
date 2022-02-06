@@ -14,6 +14,7 @@ spl_autoload_register(function (string $sClass){
 // starter la session
 
 // caca
+// caca2
 session_start();
 
 require_once __DIR__ . '/appli/models/dataBase.php';
