@@ -12,11 +12,12 @@ spl_autoload_register(function (string $sClass){
 //         ''=>,
 // ]);
 // starter la session
+
 session_start();
 
 require_once __DIR__ . '/appli/models/dataBase.php';
 $action = array_key_exists('action' , $_GET) ? $_GET['action'] : '' ;
-
+// le switch case
 try {
 switch ($action) {
         case 'admin':
